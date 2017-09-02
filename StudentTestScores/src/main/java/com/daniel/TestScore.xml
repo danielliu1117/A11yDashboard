@@ -1,0 +1,12 @@
+<bean id="testScores" class="com.testscores.TestScores">
+    <property name="TestScores">
+        <util:map map-class="java.util.HashMap">
+            <entry key="Jack Bauer" value-ref="98" />
+            <entry key="Chloe" value-ref="Collection of physical elements that comprise a computer system." />
+            <entry key="Operating System" value-ref="A set of programs that manage computer hardware resources and provide common services for application software." />
+            <entry key="while statement" value-ref="A control flow statement that allows code to be executed repeatedly based on a given boolean condition." />
+            <entry key="printf statement" value-ref="Refers to a control parameter used by a class of functions typically associated with some types of programming languages." />
+            <entry key="Internet Service Provider" value-ref="An organization that provides access to the Internet." />
+            <entry key="round robin" value-ref="Used to describe a document signed by multiple parties in a circle to make it more difficult to determine the order in which it was signed, thus preventing a ringleader from being identified." />
+            <entry key="Internet Protocol" value-ref="Principal communications protocol used for relaying datagrams (also known as network packets) across an internetwork using the Internet Protocol Suite." />
+        </util:map>

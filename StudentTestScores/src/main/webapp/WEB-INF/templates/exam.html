@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Exams</title>
+    		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" type="text/css" href="../../css/styles.css" th:href="@{/css/styles.css}" />
+	</head>
+    <body>
+    	<div id="content">  <!-- th:unless="${#lists.isEmpty(allExams)}"> -->
+    		<h1 th:text="#{title.list}">List of Exams</h1>
+    		<table>
+    			<thead>
+	    			<tr>
+	    				<th th:text="#{exam.examDate}">Date</th>
+	    				<th th:text="#{exam.examTitle}">Title</th>
+	    				<th th:text="#{exam.scores}">Scores</th>
+	    			</tr>
+	    		</thead>
+	    		<tbody>
+	    			<tr th:each="ex : ${allExams}">
+	    				<td th:text="${{ex.examDate}}">17/11/2016</td>
+	    				<td th:text="${{ex.examTitle}}">Title</td>
+	    				<td>
+	    					<table>
+	    						<tbody>
+	    							<tr th:each="scores,scoreStat : ${allScores}">
+	    								<td th:text="${scoreStat.count}">1</td>
+	    								<td th:text="${scores.firstName}">Daniel</td>
+	    								<td th:text="${scores.lastName}">Liu</td>
+	    								<td th:text="${scores.score}">100</td>
+	    							</tr>
+	    						</tbody>
+	    					</table>
+	    				</td>
+	    			</tr>
+	    		</tbody>
+    		</table>
+    	</div>
+    </body>
+</html>

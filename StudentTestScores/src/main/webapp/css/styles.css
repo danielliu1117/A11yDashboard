@@ -1,0 +1,21 @@
+#content {
+	width: 800px;
+	margin: 0 auto;
+	background-color:#DDD;
+	text-align: center;
+}
+
+table, th, td {
+	border: 1px solid black;
+}
+
+table {
+	width: 90%;
+	margin: 0 auto;
+	border-collapse: collapse;
+}
+
+th {
+	height: 30px;
+	background-color: #66ccff;
+}
