@@ -2,6 +2,8 @@ package com.daniel.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -44,12 +46,25 @@ public class ExamController extends WebMvcConfigurerAdapter {
 	}
 	
 	@RequestMapping(value="/exam", params={"save"})
-    public String saveSeedstarter(final Exam exam, final BindingResult bindingResult, final ModelMap model) {
+    public String saveSeedstarter(Exam exam, BindingResult bindingResult, ModelMap model) {
         if (bindingResult.hasErrors()) {
             return "exam";
         }
         this.examService.add(exam);
         model.clear();
         return "redirect:/exam";
+    }
+	
+	@RequestMapping(value="/exam", params={"addRow"})
+    public String addRow(Exam exam, BindingResult bindingResult) {
+        exam.getScores().add(new Score());
+        return "exam";
+    }
+    
+    @RequestMapping(value="/exam", params={"removeRow"})
+    public String removeRow(Exam exam, BindingResult bindingResult, HttpServletRequest req) {
+        Integer scoreId = Integer.valueOf(req.getParameter("removeScore"));
+        exam.getScores().remove(scoreId.intValue());
+        return "exam";
     }
 }

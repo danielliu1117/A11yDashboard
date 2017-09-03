@@ -11,6 +11,13 @@ public class Score {
 		super();
 	}
 	
+	public Score(Integer id, String firstName, String lastName, Integer score) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.score = score;
+	}
+	
 	public Integer getId() {
 		return id;
 	}

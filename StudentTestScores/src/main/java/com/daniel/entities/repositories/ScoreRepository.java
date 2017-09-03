@@ -12,33 +12,27 @@ import com.daniel.entities.Score;
 @Repository
 public class ScoreRepository {
 	
-	private final Map<Integer, Score> scoresById;
+	private List<Score> scores = new ArrayList<Score>();
 	
 	public ScoreRepository() {
 		super();
-		
+
+		scores.add(new Score(0, "Jack", "Reacher", 85));
+		/*
 		scoresById = new LinkedHashMap<Integer, Score>();
-		
-		Score score1 = new Score();
-		score1.setId(Integer.valueOf(1));
-		score1.setFirstName("Jack");
-		score1.setLastName("Reacher");
-		score1.setScore(Integer.valueOf(85));
-		scoresById.put(score1.getId(), score1);
-		
-		Score score2 = new Score();
-		score2.setId(Integer.valueOf(2));
-		score2.setFirstName("Olivia");
-		score2.setLastName("Blake");
-		score2.setScore(Integer.valueOf(100));
-		scoresById.put(score2.getId(), score2);
+		scoresById.put(1, new Score(0, "Jack", "Reacher", 85));
+		scoresById.put(2, new Score(1, "Olivia", "Blake", 100));
+		scoresById.put(3, new Score(2, "Bellamy", "Blake", 50));
+		scoresById.put(4, new Score(3, "Rick", "Sanchez", 1));
+		scoresById.put(5, new Score(4, "Morty", "Smith", 49));
+		*/
 	}
 	
 	public List<Score> findAll() {
-		return new ArrayList<Score>(scoresById.values());
+		return new ArrayList<Score>(this.scores);
 	}
 	
-	public Score findById(Integer id) {
-		return scoresById.get(id);
+	public void add(Score score) {
+		scores.add(score);
 	}
 }

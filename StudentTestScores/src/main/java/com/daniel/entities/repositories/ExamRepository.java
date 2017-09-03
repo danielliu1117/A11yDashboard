@@ -3,10 +3,13 @@ package com.daniel.entities.repositories;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 import com.daniel.entities.Exam;
+import com.daniel.entities.Score;
 
 @Repository
 public class ExamRepository {
@@ -16,12 +19,11 @@ public class ExamRepository {
 	public ExamRepository() {
 		super();
 		
-		Exam exam1 = new Exam();
-		exam1.setId(Integer.valueOf(1));
-		LocalDate exam1Date = LocalDate.of(2017, Month.SEPTEMBER, 01);
-		exam1.setExamDate(exam1Date);
-		exam1.setExamTitle("Biology 101");
-		exam.add(exam1);
+		List<Score> scores = new ArrayList<Score>();
+		scores.add(new Score(0, "Jack", "Reacher", 85));
+		scores.add(new Score(1, "Olivia", "Blake", 100));
+		scores.add(new Score(2, "Bellamy", "Blake", 50));
+		exam.add(new Exam(0, LocalDate.of(2017, Month.AUGUST, 8), "Chemistry 49", scores));
 	}
 	
 	public List<Exam> findAll() {

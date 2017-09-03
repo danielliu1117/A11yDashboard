@@ -22,7 +22,7 @@ public class ScoreService {
 		return scoreRepository.findAll();
 	}
 	
-	public Score findById(Integer id) {
-		return scoreRepository.findById(id);
+	public void add(Score score) {
+		scoreRepository.add(score);
 	}
 }

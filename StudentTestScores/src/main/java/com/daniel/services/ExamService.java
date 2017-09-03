@@ -19,10 +19,10 @@ public class ExamService {
 	}
 	
 	public List<Exam> findAll() {
-		return this.examRepository.findAll();
+		return examRepository.findAll();
 	}
 	
 	public void add(Exam exam) {
-		this.examRepository.add(exam);
+		examRepository.add(exam);
 	}
 }

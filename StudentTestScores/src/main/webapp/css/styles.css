@@ -1,12 +1,16 @@
+body {
+	background-color:#FCFCFC;
+}
+
 #content {
 	width: 800px;
 	margin: 0 auto;
-	background-color:#DDD;
-	text-align: center;
+	background-color:#FCFCFC;
 }
 
 table, th, td {
 	border: 1px solid black;
+	text-align: center;
 }
 
 table {
