@@ -1,36 +1,55 @@
 package com.daniel.controllers;
 
-import javax.validation.Valid;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.daniel.entities.repositories.ScoreRepository;
+import com.daniel.model.Score;
+import com.daniel.services.ScoreService;
 
 @Controller
-public class ScoreController extends WebMvcConfigurerAdapter {
-
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/results").setViewName("results");
+public class ScoreController {
+	
+	private ScoreService scoreService;
+	
+	@Autowired(required=true)
+	@Qualifier(value="scoreService")
+	public void setScoreService(ScoreService scoreService) {
+		this.scoreService = scoreService;
+	}
+	
+	@RequestMapping(value="/scores", method=RequestMethod.GET)
+	public String listScores(Model model) {
+		model.addAttribute("listScores", this.scoreService.listScores());
+		return "score";
+	}
+	
+	@RequestMapping(value="/score/add", method=RequestMethod.POST)
+	public String addScore(@ModelAttribute("score") Score score) {
+		if (score.getScoreId() == 0) {
+			this.scoreService.addScore(score);
+		} else {
+			this.scoreService.updateScore(score);
+		}
+		
+		return "redirect:/scores";
+	}
+	
+	@RequestMapping(value="/remove/{scoreId}")
+    public String removeScore(@PathVariable("scoreId") Score score) {
+        this.scoreService.removeScore(score);
+        return "redirect:/scores";
     }
-
-    @GetMapping("/input-scores")
-    public String showForm(ScoreRepository scoreForm) {
-        return "score";
-    }
-
-    @PostMapping("/input-scores")
-    public String checkTestResultInfo(@Valid ScoreRepository scoreForm, BindingResult bindingResult) {
-
-        if (bindingResult.hasErrors()) {
-            return "score";
-        }
-
-        return "redirect:/results";
+	
+	@RequestMapping(value="/edit/{scoreId}")
+    public String editScore(@PathVariable("scoreId") int scoreId, Model model) {
+		model.addAttribute("score", this.scoreService.getScoreById(scoreId));
+		model.addAttribute("listScores", this.scoreService.listScores());
+		return "score";
     }
 }
